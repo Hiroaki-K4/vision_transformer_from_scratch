@@ -44,16 +44,18 @@ def main(image, P):
             ax.imshow(patches[num])
     plt.show()
 
-    # Display first 10 flattened patches up to 25 values 
+    # Display first 10 flattened patches up to 25 values
     heat_map = x_p[:10, :25]
-    print(heat_map)
-    yticklabels = ['patch ' + str(i + 1) for i in range(10)]
-    plt.title('First 10 Flattened Patches')
-    ax = sns.heatmap(heat_map,  
-                    cmap=sns.light_palette("#79C", as_cmap=True),
-                    xticklabels=False, yticklabels=yticklabels,
-                    linewidths=0.01, linecolor='white'
-                    )
+    yticklabels = ["patch " + str(i + 1) for i in range(10)]
+    plt.title("First 10 Flattened Patches")
+    ax = sns.heatmap(
+        heat_map,
+        cmap=sns.light_palette("#79C", as_cmap=True),
+        xticklabels=False,
+        yticklabels=yticklabels,
+        linewidths=0.01,
+        linecolor="white",
+    )
     plt.show()
 
 
