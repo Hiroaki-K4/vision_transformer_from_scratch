@@ -1,19 +1,19 @@
+import os
+
+import matplotlib.pyplot as plt
+import numpy as np
 import torch
 import torch.nn as nn
-import torchvision
-from torchvision import datasets
-
-from torch.utils.data import DataLoader
-from torch.utils.data.sampler import SubsetRandomSampler
-import torchvision.models as models
 import torch.nn.functional as F
-import torchvision.transforms as T
 import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
-import numpy as np
-import os
+import torchvision
+import torchvision.models as models
+import torchvision.transforms as T
+from torch.utils.data import DataLoader
+from torch.utils.data.sampler import SubsetRandomSampler
+from torchvision import datasets
 from tqdm import tqdm
-import matplotlib.pyplot as plt
 
 
 def main():

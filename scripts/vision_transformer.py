@@ -1,7 +1,9 @@
 import torch
 import torch.nn as nn
-from PIL import Image
 import torchvision.transforms as T
+from PIL import Image
+
+from transformer_encoder import TransformerEncoder
 
 
 class VisionTransformer(nn.Module):
@@ -17,6 +19,7 @@ class VisionTransformer(nn.Module):
         dropout_prob=0.1,
         num_classes=10,
         pretrain=True,
+        D=768,
     ):
         super(VisionTransformer, self).__init__()
         self.patch_size = patch_size
@@ -28,15 +31,14 @@ class VisionTransformer(nn.Module):
         self.dropout_prob = dropout_prob
         self.num_classes = num_classes
         self.pretrain = pretrain
+        self.D = D
 
         # Get number of patches of the image
         self.num_patches = int(image_size / patch_size) ** 2
         # trainable linear projection for mapping dimnesion of patches (weight matrix E)
-        self.W = nn.Parameter(
+        self.E = nn.Parameter(
             torch.randn(patch_size * patch_size * channel_size, embedding_dim)
         )
-        print(self.W.shape)
-        input()
 
         # position embeddings (E_pos)
         self.pos_embedding = nn.Parameter(
@@ -44,7 +46,8 @@ class VisionTransformer(nn.Module):
         )
 
         # learnable class token embedding (x_class)
-        self.class_token = nn.Parameter(torch.rand(1, D))
+        self.class_token = nn.Parameter(torch.rand(1, self.D))
+        print(self.class_token.shape)
 
         # stack transformer encoder layers
         transformer_encoder_list = [
@@ -61,11 +64,11 @@ class VisionTransformer(nn.Module):
         P, C = self.patch_size, self.channel_size
 
         # split image into patches
-        patches = x.unfold(1, C, C).unfold(2, P, P).unfold(3, P, P)
+        patches = x.unfold(0, C, C).unfold(1, P, P).unfold(2, P, P)
         patches = patches.contiguous().view(patches.size(0), -1, C * P * P).float()
 
         # linearly embed patches
-        patch_embeddings = torch.matmul(patches, self.W)
+        patch_embeddings = torch.matmul(patches, self.E)
 
         # add class token
         batch_size = patch_embeddings.shape[0]
@@ -101,19 +104,16 @@ def main():
     image = Image.open("../resources/car.png").resize((image_size, image_size))
     X = T.PILToTensor()(image)  # Shape [channel_size, image_size, image_size]
     patch_size = 16
-    print(X.shape)
     patches = (
         X.unfold(0, channel_size, channel_size)
         .unfold(1, patch_size, patch_size)
         .unfold(2, patch_size, patch_size)
     )  # Shape [1, image_size/patch_size, image_size/patch_size, channel_size, patch_size, patch_size]
-    print(patches.shape)
     patches = (
         patches.contiguous()
         .view(patches.size(0), -1, channel_size * patch_size * patch_size)
         .float()
     )  # Shape [1, Number of patches, channel_size*patch_size*patch_size]
-    print(patches.shape)
     # init vision transformer model
     vision_transformer = VisionTransformer(
         patch_size,

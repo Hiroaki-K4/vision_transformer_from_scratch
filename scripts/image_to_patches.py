@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from PIL import Image
 import seaborn as sns
+from PIL import Image
 
 
 def main(image, P):
