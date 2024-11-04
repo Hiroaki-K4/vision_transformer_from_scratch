@@ -1,5 +1,7 @@
 # vision_transformer_from_scratch
-This repository was created to help me better understand Vision Transformer. I wrote the explanatory article here. The code is based on [this repository](https://github.com/nerminnuraydogan/vision-transformer/tree/main).
+<img src="resources/vit.png" width='600'>
+
+This repository was created to help me better understand Vision Transformer. I wrote the explanatory article [here](https://medium.com/@hirok4/explanation-of-vision-transformer-with-implementation-8f098ebc1233). The code is based on [this repository](https://github.com/nerminnuraydogan/vision-transformer/tree/main).
 
 <br></br>
 
@@ -33,6 +35,20 @@ You can train vision transformer model by using pretrained model.
 conda activate vit
 cd scripts
 python train.py
+```
+
+<br></br>
+
+## Appendix: Image patches
+
+<img src="resources/image_to_patches.png" width='600'>
+
+You can try split an image to image patches by running following commands.
+
+```bash
+conda activate vit
+cd scripts
+python image_to_patches.py
 ```
 
 <br></br>
