@@ -1,4 +1,39 @@
-torch
-torchvision
-matplotlib
-seaborn
+Brotli @ file:///croot/brotli-split_1714483155106/work
+certifi @ file:///croot/certifi_1725551672989/work/certifi
+charset-normalizer @ file:///croot/charset-normalizer_1721748349566/work
+contourpy==1.3.0
+cycler==0.12.1
+filelock @ file:///croot/filelock_1700591183607/work
+fonttools==4.54.1
+fsspec==2024.9.0
+gmpy2 @ file:///work/ci_py311/gmpy2_1676839849213/work
+idna @ file:///croot/idna_1714398848350/work
+Jinja2 @ file:///croot/jinja2_1716993405101/work
+kiwisolver==1.4.7
+MarkupSafe @ file:///croot/markupsafe_1704205993651/work
+matplotlib==3.9.2
+mkl-service==2.4.0
+mkl_fft @ file:///croot/mkl_fft_1725370245198/work
+mkl_random @ file:///croot/mkl_random_1725370241878/work
+mpmath @ file:///croot/mpmath_1690848262763/work
+networkx @ file:///croot/networkx_1717597493534/work
+numpy @ file:///croot/numpy_and_numpy_base_1725470312869/work/dist/numpy-2.0.1-cp311-cp311-linux_x86_64.whl#sha256=372b9067cf9c96d8662c6f20ef49eeda43f0f8d2f074820224c954d8d8fae7bc
+packaging==24.1
+pandas==2.2.3
+pillow @ file:///croot/pillow_1721059439630/work
+pyparsing==3.2.0
+PySocks @ file:///work/ci_py311/pysocks_1676822712504/work
+python-dateutil==2.9.0.post0
+pytz==2024.2
+PyYAML @ file:///croot/pyyaml_1728657952215/work
+requests @ file:///croot/requests_1721410876868/work
+seaborn==0.13.2
+six==1.16.0
+sympy @ file:///croot/sympy_1724938189289/work
+torch==2.4.1
+torchvision==0.19.1
+tqdm==4.66.6
+triton==3.0.0
+typing_extensions @ file:///croot/typing_extensions_1715268824938/work
+tzdata==2024.2
+urllib3 @ file:///croot/urllib3_1727769808118/work

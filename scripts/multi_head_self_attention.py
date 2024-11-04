@@ -1,3 +1,9 @@
+import torch
+import torch.nn as nn
+
+from self_attention import SelfAttention
+
+
 class MultiHeadSelfAttention(nn.Module):
     def __init__(self, embedding_dim=768, num_heads=12):
         super(MultiHeadSelfAttention, self).__init__()
@@ -6,14 +12,16 @@ class MultiHeadSelfAttention(nn.Module):
         assert (
             embedding_dim % num_heads == 0
         )  # dimensionality should be divisible by number of heads
-        self.key_dim = embedding_dim // n_head  # set key,query and value dimensionality
+        self.key_dim = (
+            embedding_dim // num_heads
+        )  # set key,query and value dimensionality
         # init self-attentions
         self.attention_list = [
             SelfAttention(embedding_dim, self.key_dim) for _ in range(num_heads)
         ]
         self.multi_head_attention = nn.ModuleList(self.attention_list)
         # init U_msa weight matrix
-        self.W = nn.Parameter(torch.randn(num_heads * self.key_dim, embedding_dim))
+        self.U = nn.Parameter(torch.randn(num_heads * self.key_dim, embedding_dim))
 
     def forward(self, x):
         # compute self-attention scores of each head
@@ -21,6 +29,6 @@ class MultiHeadSelfAttention(nn.Module):
         # concat attentions
         Z = torch.cat(attention_scores, -1)
         # compute multi-head attention score
-        attention_score = torch.matmul(Z, self.W)
+        attention_score = torch.matmul(Z, self.U)
 
         return attention_score

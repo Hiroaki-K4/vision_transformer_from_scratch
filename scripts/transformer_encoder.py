@@ -1,5 +1,8 @@
 import torch.nn as nn
 
+from multi_head_self_attention import MultiHeadSelfAttention
+from multi_layer_perceptron import MultiLayerPerceptron
+
 
 class TransformerEncoder(nn.Module):
     def __init__(

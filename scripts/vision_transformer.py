@@ -1,8 +1,10 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import torchvision.transforms as T
 from PIL import Image
 
+from mlp_head import MLPHead
 from transformer_encoder import TransformerEncoder
 
 
@@ -47,7 +49,6 @@ class VisionTransformer(nn.Module):
 
         # learnable class token embedding (x_class)
         self.class_token = nn.Parameter(torch.rand(1, self.D))
-        print(self.class_token.shape)
 
         # stack transformer encoder layers
         transformer_encoder_list = [
@@ -131,13 +132,10 @@ def main():
     vit_output = vision_transformer(X)
 
     assert vit_output.size(dim=1) == n_class
-    print(vit_output.shape)
 
     # get class probabilities
     probabilities = F.softmax(vit_output[0], dim=0)
-
-    # probabilities should sum up to 1
-    print(torch.sum(probabilities))
+    print("Class probabilities: ", probabilities)
 
 
 if __name__ == "__main__":
